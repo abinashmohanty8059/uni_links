@@ -4,31 +4,34 @@ version '0.4.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // jcenter is deprecated
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:8.1.0' // match your Flutter project
     }
 }
 
-rootProject.allprojects {
+allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    namespace "name.avioli.unilinks" // ✅ required for AGP 8+
+    compileSdkVersion 34             // ✅ use latest SDK
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21             // ✅ Flutter requires 21+
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    lintOptions {
+
+    lint {
         disable 'InvalidPackage'
     }
 }
